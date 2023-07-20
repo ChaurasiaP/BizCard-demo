@@ -1,71 +1,78 @@
 import 'package:flutter/material.dart';
 
-class BizCard extends StatelessWidget {
+class QuotesApp extends StatefulWidget {
+  @override
+  State<QuotesApp> createState() => _QuotesAppState();
+}
+
+class _QuotesAppState extends State<QuotesApp> {
+  int _index = 0;
+
+  List quotes = [
+    "The only way to do great work is to love what you do.",
+    "Life is what happens when you're busy making other plans.",
+    "In three words I can sum up everything I've learned about life: it goes on.",
+    "The only limit to our realization of tomorrow will be our doubts of today.",
+    "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+    "The best way to predict the future is to create it.",
+    "The future belongs to those who believe in the beauty of their dreams.",
+    "Happiness is not something ready-made. It comes from your own actions.",
+    "The only person you are destined to become is the person you decide to be.",
+    "Believe you can and you're halfway there.",
+    "What lies behind us and what lies before us are tiny matters compared to what lies within us.",
+    "The only source of knowledge is experience.",
+    "Change your thoughts and you change your world.",
+    "Life isn't about finding yourself. It's about creating yourself.",
+    "The journey of a thousand miles begins with one step.",
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("BizCard"),
-        centerTitle: true,
-      ),
-      backgroundColor: Colors.orangeAccent,
-      body: Container(
-        alignment: Alignment.center,
-        child: Stack(
-          alignment: Alignment.topCenter,
-          children: <Widget>[
-            _getCard(),
-            _getAvatar()
-          ],
-        ),
-      ),
-    );
+        body: Container(
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: 350,
+                  height: 200,
+                  margin: EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                      color: Colors.pinkAccent,
+                      borderRadius: BorderRadius.circular(25.4)
+                  ),
+                  child: Text(quotes[_index % quotes.length],
+                    style: TextStyle(
+                        fontSize: 20.5,
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic
+                    ),),
+                  padding: EdgeInsets.all(40),
+                ),
+                Divider(thickness: 3.5),
+                Padding(
+                  padding: const EdgeInsets.only(top:18.0),
+                  child: TextButton.icon(
+                    onPressed: _showQuote,
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.yellow
+                    ),
+                    icon: Icon(Icons.wb_sunny),
+                    label: Text("Inspire Me!",
+                      style: TextStyle(
+                          fontSize: 20.5
+                      ),),
+                  ),
+                ),
+// use spacer her
+              ],
+            )));
   }
 
-  Container _getCard() {
-    return Container(
-      width: 350,
-      height: 200,
-      margin: EdgeInsets.all(50),
-      decoration: BoxDecoration(
-          color: Colors.pinkAccent,
-          borderRadius: BorderRadius.circular(35.5)
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text("\nPranshu Chaurasia",
-            style: TextStyle(fontSize: 25.5,
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.bold),),
-          Text(
-            "\nlorem ipsum lorem ipsum lorem ipsum\nlorem ipsum lorem ipsum lorem ipsum\n",
-            style: TextStyle(fontStyle: FontStyle.italic),),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.person_2_outlined),
-              Text("contact.pranshu30@hotmail.com",
-                style: TextStyle(fontWeight: FontWeight.w700),)
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Container _getAvatar() {
-    return Container(
-      width: 100,
-      height: 100,
-      decoration: BoxDecoration(
-          color: Colors.grey,
-          borderRadius: BorderRadius.all(Radius.circular(50.0)),
-          border: Border.all(color: Colors.redAccent, width: 2.5),
-          image: DecorationImage(
-              image: NetworkImage("https://picsum.photos/id/3/5000/3333"),
-              fit: BoxFit.cover)
-      ),
-    );
+  void _showQuote() {
+    setState(() {
+      _index++;
+    });
   }
 }

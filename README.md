@@ -1,4 +1,4 @@
-# biz_card
+# syncfusion_stacked_column_chart
 
 A new Flutter project.
 
